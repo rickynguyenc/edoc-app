@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:edoc_tabcom/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -13,6 +15,9 @@ import 'core/utils/theme/mcloud_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await dotenv.load(fileName: Environment.fileName);
   await UserPreferences.initialize();
   runApp(ProviderScope(child: MyApp()));

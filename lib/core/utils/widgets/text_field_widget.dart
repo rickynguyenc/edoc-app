@@ -5,8 +5,9 @@ class TextFieldWidget extends StatefulWidget {
   final Function(String)? onChanged;
   final TextEditingController controller;
   final String hintText;
+  final String labelText;
   final GlobalKey<FormState> formKey;
-  const TextFieldWidget({super.key, required this.validateFunc, required this.controller, required this.hintText, required this.formKey, required this.onChanged});
+  const TextFieldWidget({super.key, required this.validateFunc, required this.controller, required this.hintText, required this.formKey, required this.onChanged, required this.labelText});
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -22,6 +23,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         keyboardType: TextInputType.emailAddress,
         onChanged: widget.onChanged,
         decoration: InputDecoration(
+          labelText: widget.labelText,
           hintText: widget.hintText,
           fillColor: Color(0xFFF4F6F9),
           filled: true,

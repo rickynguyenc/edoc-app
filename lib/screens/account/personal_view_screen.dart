@@ -52,7 +52,7 @@ class PersonalViewScreen extends HookConsumerWidget {
                             child: Image.network(
                               '${Environment.apiUrl}/${userInfor.avatarUrl}',
                               errorBuilder: (context, error, stackTrace) {
-                                return Image.asset('assets/images/banner_login.png');
+                                return Image.asset('assets/images/intro_app2.png');
                               },
                             ),
                           ),

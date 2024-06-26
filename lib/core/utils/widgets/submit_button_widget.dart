@@ -10,9 +10,9 @@ class SubmitButton extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: color ?? Color(0xFF055FA7),
+        backgroundColor: color ?? Color(0xFFEC1C23),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(56),
+          borderRadius: BorderRadius.circular(6),
         ),
       ),
       onPressed: onPressed,
@@ -20,8 +20,8 @@ class SubmitButton extends HookConsumerWidget {
         text,
         style: TextStyle(
           color: Colors.white,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
+          fontSize: 15,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );

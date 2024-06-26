@@ -194,7 +194,7 @@ class NotificationElementWidget extends HookConsumerWidget {
             height: 70,
             decoration: ShapeDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/banner_login.png'),
+                image: AssetImage('assets/images/intro_app2.png'),
                 fit: BoxFit.fill,
               ),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

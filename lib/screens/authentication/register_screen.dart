@@ -106,6 +106,7 @@ class RegisterScreen extends HookConsumerWidget {
                       TextFieldWidget(
                         formKey: _userNameFormKey,
                         hintText: 'Enter your name',
+                        labelText: 'Tên người dùng',
                         onChanged: (value) => {},
                         validateFunc: (value) {
                           if (value == null || value.trim().isEmpty) {
@@ -127,6 +128,7 @@ class RegisterScreen extends HookConsumerWidget {
                       TextFieldWidget(
                         formKey: _emailFormKey,
                         hintText: 'Enter your email',
+                        labelText: 'Email',
                         onChanged: (value) => {},
                         validateFunc: (value) {
                           if (value == null || value.trim().isEmpty) {
@@ -148,6 +150,7 @@ class RegisterScreen extends HookConsumerWidget {
                       TextFieldWidget(
                         formKey: _passwordFormKey,
                         hintText: 'Enter your password',
+                        labelText: 'Mật khẩu',
                         onChanged: (value) => {},
                         validateFunc: (value) {
                           if (value == null || value.trim().isEmpty) {
@@ -169,6 +172,7 @@ class RegisterScreen extends HookConsumerWidget {
                       TextFieldWidget(
                         formKey: _confirmPasswordFormKey,
                         hintText: 'Enter your password',
+                        labelText: 'Xác nhận mật khẩu',
                         onChanged: (value) => {},
                         validateFunc: (value) {
                           if (value == null || value.trim().isEmpty) {
@@ -258,7 +262,7 @@ class RegisterScreen extends HookConsumerWidget {
                                   .then((value) {
                                 isLoading.value = false;
                                 if (value) {
-                                  context.router.push(LoginWithPasswordRoute());
+                                  context.router.push(LoginRoute());
                                 } else {
                                   CommonFunction.showSnackBar('Email đã được đăng ký', context, Colors.red);
                                 }

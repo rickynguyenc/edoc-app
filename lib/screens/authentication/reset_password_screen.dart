@@ -193,6 +193,7 @@ class ResetPasswordScreen extends HookConsumerWidget {
                       TextFieldWidget(
                         formKey: _newPasswordFormKey,
                         hintText: 'Enter your password',
+                        labelText: 'Mật khẩu',
                         onChanged: (value) => {},
                         validateFunc: (value) {
                           if (value == null || value.trim().isEmpty) {
@@ -214,6 +215,7 @@ class ResetPasswordScreen extends HookConsumerWidget {
                       TextFieldWidget(
                         formKey: _confirmPasswordFormKey,
                         hintText: 'Enter your password',
+                        labelText: 'Xác nhận mật khẩu',
                         onChanged: (value) => {},
                         validateFunc: (value) {
                           if (value == null || value.trim().isEmpty) {
@@ -241,7 +243,7 @@ class ResetPasswordScreen extends HookConsumerWidget {
 
                                   context.router.replaceAll(
                                     [
-                                      const LoginWithPasswordRoute(),
+                                      const LoginRoute(),
                                     ],
                                   );
                                 } else {

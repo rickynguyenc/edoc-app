@@ -13,8 +13,9 @@ final authServiceProvider = Provider<AuthService>((ref) {
 @RestApi()
 abstract class AuthService {
   factory AuthService(Ref ref) => _AuthService(ref.read(dioProvider));
-  @POST('/api/oauth/token')
-  Future<LoginResponse> login(@Body() FormData param);
+  @FormUrlEncoded()
+  @POST('/connect/token')
+  Future<LoginResponse> login(@Body() Map<String, dynamic> param);
   @POST('/api/res_users')
   Future<dynamic> register(@Body() Map<String, dynamic> data);
   @GET('/api/res_users/{id}')
@@ -23,4 +24,6 @@ abstract class AuthService {
   Future<dynamic> forgotPassword(@Body() Map<String, dynamic> data); //{"email":"chuongvlogger@gmail.com"}
   @POST('/api/reset_password')
   Future<dynamic> resetPassword(@Body() Map<String, dynamic> data); //{"email":"chuongvlogger@gmail.com","otp":"123456","new_password":"123456"}
+  @POST('/api/app/user-registration/authenticate-google-user')
+  Future<GoogleRegisterResponse> registerUserWithGoogle(@Body() Map<String, dynamic> data); //{"old_password":"123456","new_password":"123456"}
 }

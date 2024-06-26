@@ -94,6 +94,7 @@ class ForgotPasswordScreen extends HookConsumerWidget {
                     TextFieldWidget(
                       formKey: _emailFormKey,
                       hintText: 'Enter your email',
+                      labelText: 'Email',
                       onChanged: (value) {},
                       validateFunc: (value) {
                         if (value == null || value.trim().isEmpty) {
