@@ -23,6 +23,7 @@ class LoginScreen extends HookConsumerWidget {
     final _username = useState('');
     final _password = useState('');
     final isLoading = useState(false);
+    final _passwordVisible = useState(false);
     useEffect(() {
       UserPreferences.instance.saveLanLogin(1);
       return null;
@@ -93,6 +94,7 @@ class LoginScreen extends HookConsumerWidget {
                 // ),
                 // SizedBox(height: 8),
                 TextFieldWidget(
+                  keyboardType: TextInputType.emailAddress,
                   formKey: _userNameFormKey,
                   hintText: 'Tên người dùng/email hoặc SĐT',
                   labelText: 'Tên người dùng',
@@ -116,6 +118,18 @@ class LoginScreen extends HookConsumerWidget {
                 // SizedBox(height: 8),
                 TextFieldWidget(
                   formKey: _passwordFormKey,
+                  keyboardType: TextInputType.visiblePassword,
+                  passwordVisible: _passwordVisible.value,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      // Based on passwordVisible state choose the icon
+                      _passwordVisible.value ? Icons.visibility : Icons.visibility_off,
+                      color: const Color.fromRGBO(121, 120, 130, 1),
+                    ),
+                    onPressed: () {
+                      _passwordVisible.value = !_passwordVisible.value;
+                    },
+                  ),
                   hintText: 'Mật khẩu',
                   labelText: 'Mật khẩu',
                   onChanged: (value) => _password.value = value,

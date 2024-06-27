@@ -48,7 +48,7 @@ class AuthProvider {
         //   idToken: googleSignInAuthentication.idToken,
         // );
         final responseRegisterGG = await _authService.registerUserWithGoogle({
-          'appName': 'edoc',
+          'appName': 'Angular',
           'code': result.id,
           'email': result.email,
           'name': result.displayName,
@@ -63,7 +63,7 @@ class AuthProvider {
 
   Future<bool> register(String name, String email, String password) async {
     try {
-      final result = await _authService.register({"name": name, "login": email, "password": password});
+      final result = await _authService.register({"userName": name, "emailAddress": email, "password": password, "appName": 'Angular'});
       if (result['result']['message'] == 'Email đã được đăng ký') {
         return false;
       }
@@ -75,8 +75,13 @@ class AuthProvider {
 
   Future<bool> forgotPassword(String email) async {
     try {
-      final result = await _authService.forgotPassword({"email": email});
-      if (result['result']['message'] == 'Email không tồn tại') {
+      final checkExistEmail = await _authService.checkMailExist({"email": email});
+      if (checkExistEmail) {
+        await _authService.forgotPassword({"email": email, "appName": 'Angular'});
+        // if (result['result']['message'] == 'Email không tồn tại') {
+        //   return false;
+        // }
+      } else {
         return false;
       }
       return true;

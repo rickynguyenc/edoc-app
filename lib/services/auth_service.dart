@@ -16,14 +16,19 @@ abstract class AuthService {
   @FormUrlEncoded()
   @POST('/connect/token')
   Future<LoginResponse> login(@Body() Map<String, dynamic> param);
-  @POST('/api/res_users')
+  @POST('/api/account/register')
   Future<dynamic> register(@Body() Map<String, dynamic> data);
-  @GET('/api/res_users/{id}')
-  Future<UserInforResponse> getUserInfor(@Path('id') int id);
-  @POST('/api/forgot_password')
-  Future<dynamic> forgotPassword(@Body() Map<String, dynamic> data); //{"email":"chuongvlogger@gmail.com"}
-  @POST('/api/reset_password')
-  Future<dynamic> resetPassword(@Body() Map<String, dynamic> data); //{"email":"chuongvlogger@gmail.com","otp":"123456","new_password":"123456"}
+  // @GET('/api/res_users/{id}')
+  // Future<UserInforResponse> getUserInfor(@Path('id') int id);
+  @POST('/api/app/global-lookup-table/send-password-reset-code')
+  Future<dynamic> forgotPassword(@Body() Map<String, dynamic> data);
+  @POST('/api/app/global-lookup-table/check-email-exits')
+  Future<dynamic> checkMailExist(@Queries() Map<String, dynamic> data);
+  @POST('/api/account/reset-password')
+  Future<dynamic> resetPassword(@Body() Map<String, dynamic> data);
   @POST('/api/app/user-registration/authenticate-google-user')
-  Future<GoogleRegisterResponse> registerUserWithGoogle(@Body() Map<String, dynamic> data); //{"old_password":"123456","new_password":"123456"}
+  Future<GoogleRegisterResponse> registerUserWithGoogle(@Body() Map<String, dynamic> data);
+  // refresh token
+  @POST('/api/account/verify-password-reset-token')
+  Future<LoginResponse> refreshToken(@Body() Map<String, dynamic> param);
 }

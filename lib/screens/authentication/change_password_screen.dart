@@ -193,6 +193,7 @@ class ChangePasswordScreen extends HookConsumerWidget {
                       SizedBox(height: 8),
                       TextFieldWidget(
                         formKey: _newPasswordFormKey,
+                        keyboardType: TextInputType.text,
                         hintText: 'Enter your password',
                         labelText: 'Mật khẩu',
                         onChanged: (value) => {},
@@ -215,6 +216,7 @@ class ChangePasswordScreen extends HookConsumerWidget {
                       SizedBox(height: 8),
                       TextFieldWidget(
                         formKey: _confirmPasswordFormKey,
+                        keyboardType: TextInputType.text,
                         hintText: 'Enter your password',
                         labelText: 'Xác nhận mật khẩu',
                         onChanged: (value) => {},

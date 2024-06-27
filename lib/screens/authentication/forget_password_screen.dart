@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:edoc_tabcom/core/app_route/app_route.dart';
 import 'package:edoc_tabcom/core/utils/extension/common_function.dart';
@@ -24,99 +25,82 @@ class ForgotPasswordScreen extends HookConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
             children: [
-              SizedBox(height: 48),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 24,
-                    height: 24,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios_outlined,
-                        size: 24,
-                      ),
-                      onPressed: () {
-                        context.router.pop();
-                      },
-                    ),
-                  )
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(top: 16),
+                      child: SvgPicture.asset(
+                        'assets/icons/logo.svg',
+                        height: 48,
+                      )),
                 ],
               ),
               SizedBox(height: 24),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 24),
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Đặt lại mật khẩu',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFF212121),
-                          fontSize: 24,
-                          height: 1.7,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    Container(
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        width: 283,
-                        child: Text(
-                          'Nhập Email của bạn. Một mã OTP sẽ được gửi để đặt lại mật khẩu mới.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color(0xFF616161),
-                            fontSize: 16,
-                            height: 1.7,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 24),
-                    Text(
-                      'Email',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    TextFieldWidget(
-                      formKey: _emailFormKey,
-                      hintText: 'Enter your email',
-                      labelText: 'Email',
-                      onChanged: (value) {},
-                      validateFunc: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Please enter your email';
-                        }
-                        return null;
+              Container(
+                margin: EdgeInsets.only(top: 24),
+                width: double.infinity,
+                alignment: Alignment.center,
+                child: Text(
+                  'Quên mật khẩu',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFF243757),
+                    fontSize: 20,
+                    height: 1.7,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              SizedBox(height: 24),
+              TextFieldWidget(
+                formKey: _emailFormKey,
+                keyboardType: TextInputType.emailAddress,
+                hintText: 'Email đã đăng ký',
+                labelText: 'Email',
+                onChanged: (value) {},
+                validateFunc: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Vui lòng nhập email';
+                  }
+                  return null;
+                },
+                controller: _txtEmailCtrl,
+              ),
+              SizedBox(height: 24),
+              Row(
+                children: [
+                  Container(
+                    width: 108,
+                    height: 48,
+                    child: SubmitButton(
+                      'Quay lại',
+                      color: Color(0xFF98A1B0),
+                      onPressed: () async {
+                        context.router.pop();
                       },
-                      controller: _txtEmailCtrl,
                     ),
-                    Spacer(),
-                    Container(
+                  ),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Container(
                       height: 48,
                       width: double.infinity,
                       child: SubmitButton(
-                        'Tiếp tục',
+                        'Gửi đi',
                         onPressed: () async {
                           if (_emailFormKey.currentState!.validate()) {
                             isLoading.value = true;
                             final result = await ref.read(authProvider).forgotPassword(_txtEmailCtrl.text);
                             isLoading.value = false;
                             if (result) {
-                              context.router.push(ResetPasswordRoute(email: _txtEmailCtrl.text));
+                              context.router.pop();
+                              CommonFunction.showSnackBar('Vui lòng kiểm tra email để thay đổi mật khẩu mới', context, Colors.green);
                             } else {
                               CommonFunction.showSnackBar('Email của bạn không đúng', context, Colors.red);
                             }
@@ -124,10 +108,9 @@ class ForgotPasswordScreen extends HookConsumerWidget {
                         },
                       ),
                     ),
-                    SizedBox(height: 24),
-                  ],
-                ),
-              ),
+                  ),
+                ],
+              )
             ],
           ),
         ),

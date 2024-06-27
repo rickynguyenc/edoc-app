@@ -192,6 +192,7 @@ class ResetPasswordScreen extends HookConsumerWidget {
                       SizedBox(height: 8),
                       TextFieldWidget(
                         formKey: _newPasswordFormKey,
+                        keyboardType: TextInputType.visiblePassword,
                         hintText: 'Enter your password',
                         labelText: 'Mật khẩu',
                         onChanged: (value) => {},
@@ -214,6 +215,7 @@ class ResetPasswordScreen extends HookConsumerWidget {
                       SizedBox(height: 8),
                       TextFieldWidget(
                         formKey: _confirmPasswordFormKey,
+                        keyboardType: TextInputType.visiblePassword,
                         hintText: 'Enter your password',
                         labelText: 'Xác nhận mật khẩu',
                         onChanged: (value) => {},

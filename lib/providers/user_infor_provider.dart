@@ -13,10 +13,10 @@ class UserInforNotifier extends StateNotifier<UserInfor> {
 
   Future<bool> getUserInfor(int idUser) async {
     try {
-      final response = await _authService.getUserInfor(idUser);
-      if (response.result != null && response.result!.isNotEmpty) {
-        state = response.result![0];
-      }
+      // final response = await _authService.getUserInfor(idUser);
+      // if (response.result != null && response.result!.isNotEmpty) {
+      //   state = response.result![0];
+      // }
       return true;
     } catch (e) {
       return false;
