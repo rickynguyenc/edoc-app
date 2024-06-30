@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:edoc_tabcom/providers/account_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:edoc_tabcom/core/app_route/app_route.dart';
 import 'package:edoc_tabcom/core/utils/env.dart';
-import 'package:edoc_tabcom/providers/user_infor_provider.dart';
 
 import '../../providers/authentication_provider.dart';
 
@@ -13,7 +13,7 @@ class PersonalViewScreen extends HookConsumerWidget {
   const PersonalViewScreen({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userInfor = ref.watch(userInforProvider);
+    final userInfor = ref.watch(accountProvider);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xffF5F5F5),
@@ -50,7 +50,7 @@ class PersonalViewScreen extends HookConsumerWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(50),
                             child: Image.network(
-                              '${Environment.apiUrl}/${userInfor.avatarUrl}',
+                              '${Environment.apiUrl}/${userInfor.avatar}',
                               errorBuilder: (context, error, stackTrace) {
                                 return Image.asset('assets/images/intro_app2.png');
                               },
@@ -74,7 +74,7 @@ class PersonalViewScreen extends HookConsumerWidget {
                               ),
                               const SizedBox(height: 2),
                               Text(
-                                userInfor.partnerId?.mobile?.toString() ?? '',
+                                userInfor.phoneNumber?.toString() ?? '',
                                 style: TextStyle(
                                   color: Color(0xFF9CA3AF),
                                   fontSize: 14,

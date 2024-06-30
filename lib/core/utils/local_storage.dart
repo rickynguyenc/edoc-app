@@ -1,7 +1,7 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe, unnecessary_null_comparison
 
 import 'dart:convert';
-import 'package:edoc_tabcom/models/user_infor_model.dart';
+import 'package:edoc_tabcom/models/account_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefConstant {

@@ -62,3 +62,35 @@ extension HexColor on Color {
       '${green.toRadixString(16).padLeft(2, '0')}'
       '${blue.toRadixString(16).padLeft(2, '0')}';
 }
+
+class PageLink {
+  final String sorting;
+  final int skipCount;
+  final int maxResultCount;
+  PageLink({
+    this.sorting = 'Lastest',
+    this.skipCount = 0,
+    this.maxResultCount = 20,
+  });
+  // toJson
+  Map<String, dynamic> toJson() {
+    return {
+      'sorting': sorting,
+      'skipCount': skipCount,
+      'maxResultCount': maxResultCount,
+    };
+  }
+
+  // copy with
+  PageLink copyWith({
+    String? sorting,
+    int? skipCount,
+    int? maxResultCount,
+  }) {
+    return PageLink(
+      sorting: sorting ?? this.sorting,
+      skipCount: skipCount ?? this.skipCount,
+      maxResultCount: maxResultCount ?? this.maxResultCount,
+    );
+  }
+}

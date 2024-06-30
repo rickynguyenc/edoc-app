@@ -2,9 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:edoc_tabcom/screens/home/home_screen.dart';
 import 'package:edoc_tabcom/screens/my_document/my_document_screen.dart';
 import 'package:edoc_tabcom/screens/system_management/system_management_list_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:edoc_tabcom/generated/l10n.dart';
-import 'package:edoc_tabcom/models/cart_model.dart';
 import 'package:edoc_tabcom/providers/authentication_provider.dart';
 import 'package:edoc_tabcom/screens/authentication/change_password_screen.dart';
 import 'package:edoc_tabcom/screens/tab_screen.dart';
@@ -16,6 +13,7 @@ import '../../screens/authentication/register_screen.dart';
 import '../../screens/authentication/reset_password_screen.dart';
 import '../../screens/authentication/welcome_screen.dart';
 import '../../screens/notification/notification_dashboard_screen.dart';
+import '../../screens/account/my_account_tab.dart';
 import 'app_route_guard.dart';
 part 'app_route.gr.dart';
 
@@ -32,6 +30,8 @@ class AppRouter extends _$AppRouter {
             children: [
               AutoRoute(page: HomeRoute.page, path: 'home'),
               AutoRoute(page: MyDocumentRoute.page, path: 'my-document'),
+              AutoRoute(page: NotificationProductRoute.page, path: 'notification-dashboard'),
+              AutoRoute(page: MyAccountTabRoute.page, path: 'account'),
               AutoRoute(page: SystemManagementListRoute.page, path: 'system-management'),
             ]),
         AutoRoute(page: WelcomeRoute.page, path: '/welcome'),

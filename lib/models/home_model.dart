@@ -1,215 +1,141 @@
-// Danh sách sản phẩm
-class ListProductResponse {
-  num? count;
-  dynamic prev;
-  num? current;
-  dynamic next;
-  num? totalPages;
-  List<Product>? result;
+// public list
+class PublicListResonpse {
+  int? totalCount;
+  List<DocumentItem>? items;
 
-  ListProductResponse({this.count, this.prev, this.current, this.next, this.totalPages, this.result});
+  PublicListResonpse({this.totalCount, this.items});
 
-  ListProductResponse.fromJson(Map<String, dynamic> json) {
-    count = json['count'];
-    prev = json['prev'];
-    current = json['current'];
-    next = json['next'];
-    totalPages = json['total_pages'];
-    if (json['result'] != null) {
-      result = <Product>[];
-      json['result'].forEach((v) {
-        result!.add(new Product.fromJson(v));
+  PublicListResonpse.fromJson(Map<String, dynamic> json) {
+    totalCount = json['totalCount'];
+    if (json['items'] != null) {
+      items = <DocumentItem>[];
+      json['items'].forEach((v) {
+        items!.add(new DocumentItem.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['count'] = this.count;
-    data['prev'] = this.prev;
-    data['current'] = this.current;
-    data['next'] = this.next;
-    data['total_pages'] = this.totalPages;
-    if (this.result != null) {
-      data['result'] = this.result!.map((v) => v.toJson()).toList();
+    data['totalCount'] = this.totalCount;
+    if (this.items != null) {
+      data['items'] = this.items!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Product {
-  num? id;
-  String? name;
+class DocumentItem {
+  String? fileName;
   String? avatarUrl;
-  List<AttributeLineIds>? attributeLineIds;
-  List<dynamic>? productTemplateImageIds;
-  AttributeId? categId;
-  num? listPrice;
+  String? description;
+  String? author;
+  int? fileMode;
+  dynamic categoryName;
+  String? createDate;
+  int? point;
+  String? size;
+  String? userId;
+  bool? isLiked;
+  int? downloads;
+  int? shared;
+  int? likes;
+  int? view;
+  String? id;
 
-  Product({this.id, this.name, this.avatarUrl, this.attributeLineIds, this.productTemplateImageIds, this.categId, this.listPrice});
+  DocumentItem(
+      {this.fileName,
+      this.avatarUrl,
+      this.description,
+      this.author,
+      this.fileMode,
+      this.categoryName,
+      this.createDate,
+      this.point,
+      this.size,
+      this.userId,
+      this.isLiked,
+      this.downloads,
+      this.shared,
+      this.likes,
+      this.view,
+      this.id});
 
-  Product.fromJson(Map<String, dynamic> json) {
+  DocumentItem.fromJson(Map<String, dynamic> json) {
+    fileName = json['fileName'];
+    avatarUrl = json['avatarUrl'];
+    description = json['description'];
+    author = json['author'];
+    fileMode = json['fileMode'];
+    categoryName = json['categoryName'];
+    createDate = json['createDate'];
+    point = json['point'];
+    size = json['size'];
+    userId = json['userId'];
+    isLiked = json['isLiked'];
+    downloads = json['downloads'];
+    shared = json['shared'];
+    likes = json['likes'];
+    view = json['view'];
     id = json['id'];
-    name = json['name'];
-    avatarUrl = json['avatar_url'];
-    if (json['attribute_line_ids'] != null) {
-      attributeLineIds = <AttributeLineIds>[];
-      json['attribute_line_ids'].forEach((v) {
-        attributeLineIds!.add(new AttributeLineIds.fromJson(v));
-      });
-    }
-    if (json['product_template_image_ids'] != null) {
-      productTemplateImageIds = <dynamic>[];
-      json['product_template_image_ids'].forEach((v) {
-        productTemplateImageIds!.add(v);
-      });
-    }
-    categId = json['categ_id'] != null ? new AttributeId.fromJson(json['categ_id']) : null;
-    listPrice = json['list_price'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['fileName'] = this.fileName;
+    data['avatarUrl'] = this.avatarUrl;
+    data['description'] = this.description;
+    data['author'] = this.author;
+    data['fileMode'] = this.fileMode;
+    data['categoryName'] = this.categoryName;
+    data['createDate'] = this.createDate;
+    data['point'] = this.point;
+    data['size'] = this.size;
+    data['userId'] = this.userId;
+    data['isLiked'] = this.isLiked;
+    data['downloads'] = this.downloads;
+    data['shared'] = this.shared;
+    data['likes'] = this.likes;
+    data['view'] = this.view;
     data['id'] = this.id;
-    data['name'] = this.name;
-    data['avatar_url'] = this.avatarUrl;
-    if (this.attributeLineIds != null) {
-      data['attribute_line_ids'] = this.attributeLineIds!.map((v) => v.toJson()).toList();
-    }
-    if (this.productTemplateImageIds != null) {
-      data['product_template_image_ids'] = this.productTemplateImageIds!.map((v) => v.toJson()).toList();
-    }
-    if (this.categId != null) {
-      data['categ_id'] = this.categId!.toJson();
-    }
-    data['list_price'] = this.listPrice;
     return data;
   }
 }
 
-class AttributeLineIds {
-  num? id;
-  AttributeId? attributeId;
-  List<ValueIds>? valueIds;
+class CategoryTreeResonpse {
+  String? label;
+  String? id;
+  dynamic type;
+  bool? checked;
+  dynamic disabled;
+  List<CategoryTreeResonpse?>? children;
 
-  AttributeLineIds({this.id, this.attributeId, this.valueIds});
+  CategoryTreeResonpse({this.label, this.id, this.type, this.checked, this.disabled, this.children});
 
-  AttributeLineIds.fromJson(Map<String, dynamic> json) {
+  CategoryTreeResonpse.fromJson(Map<String, dynamic> json) {
+    label = json['label'];
     id = json['id'];
-    attributeId = json['attribute_id'] != null ? new AttributeId.fromJson(json['attribute_id']) : null;
-    if (json['value_ids'] != null) {
-      valueIds = <ValueIds>[];
-      json['value_ids'].forEach((v) {
-        valueIds!.add(new ValueIds.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.attributeId != null) {
-      data['attribute_id'] = this.attributeId!.toJson();
-    }
-    if (this.valueIds != null) {
-      data['value_ids'] = this.valueIds!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class AttributeId {
-  num? id;
-  String? name;
-
-  AttributeId({this.id, this.name});
-
-  AttributeId.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    return data;
-  }
-}
-
-class ValueIds {
-  num? id;
-  String? name;
-
-  ValueIds({this.id, this.name});
-
-  ValueIds.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    return data;
-  }
-}
-
-// Danh mục sản phẩm
-class CategoryProductResponse {
-  num? count;
-  dynamic prev;
-  num? current;
-  dynamic next;
-  num? totalPages;
-  List<Category>? result;
-
-  CategoryProductResponse({this.count, this.prev, this.current, this.next, this.totalPages, this.result});
-
-  CategoryProductResponse.fromJson(Map<String, dynamic> json) {
-    count = json['count'];
-    prev = json['prev'];
-    current = json['current'];
-    next = json['next'];
-    totalPages = json['total_pages'];
-    if (json['result'] != null) {
-      result = <Category>[];
-      json['result'].forEach((v) {
-        result!.add(new Category.fromJson(v));
+    type = json['type'];
+    checked = json['checked'];
+    disabled = json['disabled'];
+    if (json['children'] != null) {
+      children = <Null>[];
+      json['children'].forEach((v) {
+        children!.add(new CategoryTreeResonpse.fromJson(v));
       });
     }
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['count'] = this.count;
-    data['prev'] = this.prev;
-    data['current'] = this.current;
-    data['next'] = this.next;
-    data['total_pages'] = this.totalPages;
-    if (this.result != null) {
-      data['result'] = this.result!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Category {
-  num? id;
-  String? name;
-
-  Category({this.id, this.name});
-
-  Category.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['label'] = this.label;
+  //   data['id'] = this.id;
+  //   data['type'] = this.type;
+  //   data['checked'] = this.checked;
+  //   data['disabled'] = this.disabled;
+  //   if (this.children != null) {
+  //     data['children'] = this.children!.map((v) => CategoryTreeResonpse.toJson()).toList();
+  //   }
+  //   return data;
+  // }
 }

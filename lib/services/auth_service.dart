@@ -1,5 +1,4 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:edoc_tabcom/models/user_infor_model.dart';
 import 'package:retrofit/http.dart';
 
 import '../core/app_dio.dart';

@@ -12,8 +12,10 @@ final homeServiceProvider = Provider<HomeService>((ref) {
 @RestApi()
 abstract class HomeService {
   factory HomeService(Ref ref) => _HomeService(ref.read(dioProvider));
-  @GET('/api/product_template')
-  Future<ListProductResponse> getListProducts();
-  @GET('/api/product_category')
-  Future<CategoryProductResponse> getListCategories();
+  @GET('/api/app/global-lookup-table/category-tree')
+  Future<List<CategoryTreeResonpse>> getCategoryTree();
+  @GET('/api/app/app-file/pulic-list')
+  Future<PublicListResonpse> getPublicList(@Queries() Map<String, dynamic> data);
+
+  ///PageLink
 }

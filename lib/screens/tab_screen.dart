@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:edoc_tabcom/providers/account_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:edoc_tabcom/core/app_route/app_route.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:edoc_tabcom/core/utils/local_storage.dart';
-import 'package:edoc_tabcom/providers/user_infor_provider.dart';
 
 @RoutePage()
 class TabScreen extends HookConsumerWidget {
@@ -12,34 +12,75 @@ class TabScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     useEffect(() {
-      final idUser = UserPreferences.instance.getUserId();
-      ref.read(userInforProvider.notifier).getUserInfor(idUser ?? 0);
+      ref.read(accountProvider.notifier).getUserInfor();
       return null;
     }, []);
     return AutoTabsScaffold(
-      routes: [
-        HomeRoute(),
-        MyDocumentRoute(),
-        SystemManagementListRoute(),
-      ],
+      routes: [HomeRoute(), MyDocumentRoute(), NotificationProductRoute(), SystemManagementListRoute(), MyAccountTabRoute()],
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavigationBar(
           currentIndex: tabsRouter.activeIndex,
           backgroundColor: Colors.white,
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Color(0xff055FA7),
-          unselectedItemColor: Color(0xff2B2B2B),
+          selectedItemColor: Color(0xffEC1C23),
+          unselectedItemColor: Color(0xff616161),
           selectedLabelStyle: TextStyle(
-            color: Color(0xff055FA7),
+            fontSize: 10,
+            fontWeight: FontWeight.w500,
+            color: Color(0xffEC1C23),
           ),
           unselectedLabelStyle: TextStyle(
-            color: Color(0xff2B2B2B),
+            fontSize: 10,
+            fontWeight: FontWeight.w500,
+            color: Color(0xff616161),
           ),
           onTap: tabsRouter.setActiveIndex,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Trang chủ'),
-            BottomNavigationBarItem(icon: Icon(Icons.document_scanner_outlined), label: 'Tài liệu của tôi'),
-            BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: 'Quản trị hệ thống'),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'assets/icons/fi_home.svg',
+                  colorFilter: ColorFilter.mode(
+                    tabsRouter.activeIndex == 0 ? Color(0xffEC1C23) : const Color(0xff616161),
+                    BlendMode.srcIn,
+                  ),
+                ),
+                label: 'Trang chủ'),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'assets/icons/u_file-info-alt.svg',
+                  colorFilter: ColorFilter.mode(
+                    tabsRouter.activeIndex == 1 ? Color(0xffEC1C23) : const Color(0xff616161),
+                    BlendMode.srcIn,
+                  ),
+                ),
+                label: 'Tài liệu của tôi'),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'assets/icons/notification.svg',
+                  colorFilter: ColorFilter.mode(
+                    tabsRouter.activeIndex == 2 ? Color(0xffEC1C23) : const Color(0xff616161),
+                    BlendMode.srcIn,
+                  ),
+                ),
+                label: 'Thông báo'),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'assets/icons/u_setting.svg',
+                  colorFilter: ColorFilter.mode(
+                    tabsRouter.activeIndex == 3 ? Color(0xffEC1C23) : const Color(0xff616161),
+                    BlendMode.srcIn,
+                  ),
+                ),
+                label: 'Quản trị'),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'assets/icons/u_user.svg',
+                  colorFilter: ColorFilter.mode(
+                    tabsRouter.activeIndex == 4 ? Color(0xffEC1C23) : const Color(0xff616161),
+                    BlendMode.srcIn,
+                  ),
+                ),
+                label: 'Tài khoản'),
           ],
         );
       },
