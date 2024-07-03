@@ -2,20 +2,20 @@ class UserInfor {
   String? phoneNumber;
   int? sizeUpload;
   String? name;
-  Null? password;
+  dynamic password;
   String? email;
   String? fullName;
-  Null? appleId;
+  dynamic appleId;
   String? avatar;
-  Null? facebookId;
+  dynamic facebookId;
   String? organizationId;
   int? accountType;
   int? point;
   String? address;
   String? jobPosition;
   int? status;
-  Null? roleNames;
-  Null? roleIds;
+  dynamic roleNames;
+  dynamic roleIds;
 
   UserInfor(
       {this.phoneNumber,

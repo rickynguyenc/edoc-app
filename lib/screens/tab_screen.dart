@@ -12,7 +12,7 @@ class TabScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     useEffect(() {
-      ref.read(accountProvider.notifier).getUserInfor();
+      // ref.read(accountProvider.notifier).getUserInfor();
       return null;
     }, []);
     return AutoTabsScaffold(

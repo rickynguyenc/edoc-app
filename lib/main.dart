@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:edoc_tabcom/core/utils/theme/edoc_theme.dart';
 import 'package:edoc_tabcom/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ import 'package:edoc_tabcom/providers/authentication_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'core/utils/local_storage.dart';
-import 'core/utils/theme/mcloud_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +42,7 @@ class MyApp extends HookConsumerWidget {
         navigatorObservers: () => [AutoRouteObserver()],
       ),
       debugShowCheckedModeBanner: false,
-      theme: MCloudTheme.lightTheme,
+      theme: EdocTheme.lightTheme,
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: ThemeMode.light,
     );

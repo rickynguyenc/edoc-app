@@ -29,10 +29,14 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     final style = widget.textSearch.isEmpty ? styleHint : styleActive;
     return Container(
       // height: 48,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          // color: Color(0xFFF4F6F9),
-          color: Colors.white),
+      alignment: Alignment.center,
+      decoration: ShapeDecoration(
+        color: Color(0xFFF6F6F6),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(width: 2, color: Color(0xFFF6F6F6)),
+          borderRadius: BorderRadius.circular(50),
+        ),
+      ),
       padding: const EdgeInsets.symmetric(
         horizontal: 12,
       ),
@@ -42,45 +46,33 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         onChanged: widget.onChanged,
         controller: controller,
         decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(16),
-            hintText: widget.hintText,
-            hintStyle: style,
-            border: InputBorder.none,
-            prefixIcon: Row(children: [
-              SvgPicture.asset(
-                'assets/icons/search-normal.svg',
-                width: 24,
-                height: 24,
+          contentPadding: const EdgeInsets.only(left: 16, top: 11, bottom: 11, right: 16),
+          hintText: widget.hintText,
+          constraints: BoxConstraints(minHeight: 32, maxHeight: 46),
+          hintStyle: style,
+          border: InputBorder.none,
+          suffixIcon: Container(
+            height: 24,
+            child: IconButton(
+              constraints: BoxConstraints(minWidth: 24, minHeight: 24),
+              style: ButtonStyle(
+                padding: MaterialStateProperty.all(EdgeInsets.zero),
+                minimumSize: MaterialStateProperty.all(Size(24, 24)),
+                fixedSize: MaterialStateProperty.all(Size(24, 24)),
+                maximumSize: MaterialStateProperty.all(Size(24, 24)),
               ),
-              const SizedBox(
-                width: 12,
-              ),
-            ]),
-            prefixIconConstraints: const BoxConstraints(
-              maxHeight: 24,
-              maxWidth: 36,
-            ),
-            suffixIcon: IconButton(
-              icon: SvgPicture.asset(
-                'assets/icons/horizontal-container.svg',
-                width: 24,
-                height: 24,
+              icon: Icon(
+                Icons.search_outlined,
+                color: Colors.black,
+                size: 24,
               ),
               onPressed: () {
-                widget.onChanged('');
-                controller.clear();
-
-                widget.onSubmit('');
-                // FocusScope.of(context).requestFocus(
-                //   FocusNode(),
-                // );
+                // widget.onChanged('');
+                // widget.onSubmit('');
               },
-            )
-            // suffixIconConstraints: const BoxConstraints(
-            //   maxHeight: 22,
-            //   maxWidth: 22,
-            // ),
             ),
+          ),
+        ),
         style: style,
       ),
     );

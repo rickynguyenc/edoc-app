@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MCloudTheme {
+class EdocTheme {
   static ThemeData get lightTheme {
     //Chế độ sáng
     return ThemeData(
